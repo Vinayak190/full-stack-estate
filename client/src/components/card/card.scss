@@ -1,0 +1,130 @@
+@import '../../responsive.scss';
+
+$primary-color: #ff8c00;
+$background-dark: #1a1a1a;
+$background-darker: #141414;
+$text-color: #e0e0e0;
+$border-color: #333333;
+$card-background: #242424;
+
+.card {
+  display: flex;
+  gap: 20px;
+  background-color: $card-background;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid $border-color;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .imageContainer {
+    flex: 2;
+    height: 200px;
+
+    @include md {
+      display: none;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+  }
+
+  .textContainer {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 15px;
+
+    img {
+      width: 16px;
+      height: 16px;
+      filter: invert(0.8);
+    }
+
+    .title {
+      font-size: 20px;
+      font-weight: 600;
+      color: $text-color;
+      transition: all 0.3s ease;
+
+      a {
+        color: $text-color;
+        text-decoration: none;
+
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+
+    .address {
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: #888;
+    }
+
+    .price {
+      font-size: 20px;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 5px;
+      background-color: rgba($primary-color, 0.15);
+      color: $primary-color;
+      width: max-content;
+    }
+
+    .bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+
+      .features {
+        display: flex;
+        gap: 20px;
+        font-size: 14px;
+
+        .feature {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          background-color: $background-darker;
+          padding: 8px 12px;
+          border-radius: 5px;
+          color: $text-color;
+        }
+      }
+
+      .icons {
+        display: flex;
+        gap: 15px;
+
+        .icon {
+          border: 1px solid $border-color;
+          padding: 8px;
+          border-radius: 5px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
+
+          &:hover {
+            background-color: rgba($primary-color, 0.1);
+            border-color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+@import '../../responsive.scss';
+
+// Define variables for consistent theming
+$primary-color: #ff8c00; // Changed from #ff5722
+$background-dark: #1a1a1a;
+$background-darker: #141414;
+$text-color: #e0e0e0;
+$border-color: #333333;
+$card-background: #242424;
+
+.listPage {
+  display: flex;
+  height: 100%;
+  background-color: $background-dark;
+  color: $text-color;
+
+  .listContainer {
+    flex: 3;
+    height: 100%;
+    background-color: $background-dark;
+    border-right: 1px solid $border-color;
+
+    .wrapper {
+      height: 100%;
+      padding: 20px 50px 50px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      overflow-y: scroll;
+
+      // Customize scrollbar
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: $background-darker;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $primary-color;
+        border-radius: 4px;
+      }
+
+      // Style loading and error states
+      p {
+        color: $text-color;
+        text-align: center;
+        padding: 20px;
+
+        &:has(error) {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+
+  .mapContainer {
+    flex: 2;
+    height: 100%;
+    background-color: $background-darker;
+    border-left: 1px solid $border-color;
+
+    @include md {
+      display: none;
+    }
+  }
+}

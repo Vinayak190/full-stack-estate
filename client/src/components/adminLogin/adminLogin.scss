@@ -1,0 +1,104 @@
+.adminLogin {
+  height: calc(100vh - 100px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1a1a1a;
+
+  .card {
+    width: 100%;
+    max-width: 400px;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    background-color: #2d2d2d;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    h1 {
+      text-align: center;
+      color: #ffffff;
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #404040;
+        border-radius: 5px;
+        font-size: 16px;
+        outline: none;
+        transition: all 0.3s;
+        background-color: #333333;
+        color: #ffffff;
+
+        &::placeholder {
+          color: #888888;
+        }
+
+        &:focus {
+          border-color: #1775ee;
+          background-color: #404040;
+        }
+
+        &:disabled {
+          background-color: #2a2a2a;
+          cursor: not-allowed;
+        }
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        background-color: #1775ee;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 500;
+        transition: all 0.3s;
+
+        &:hover {
+          background-color: #1464d4;
+          transform: translateY(-2px);
+        }
+
+        &:disabled {
+          background-color: #333333;
+          cursor: not-allowed;
+        }
+      }
+
+      .error {
+        color: #ff6b6b;
+        text-align: center;
+        font-size: 14px;
+      }
+    }
+
+    .backButton {
+      display: inline-block;
+      text-align: center;
+      padding: 10px 20px;
+      background-color: #333333;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 500;
+      transition: all 0.3s;
+
+      &:hover {
+        background-color: #404040;
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
