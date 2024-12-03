@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:8800',
+        target: 'https://full-stack-estate-7zs3.onrender.com',
         changeOrigin: true,
       },
     },

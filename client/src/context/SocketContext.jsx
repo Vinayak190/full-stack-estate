@@ -1,24 +1,20 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { io } from "socket.io-client";
-import { AuthContext } from "./AuthContext";
+import { createContext, useContext, useEffect, useState } from 'react'
+import { io } from 'socket.io-client'
+import { AuthContext } from './AuthContext'
 
-export const SocketContext = createContext();
+export const SocketContext = createContext()
 
 export const SocketContextProvider = ({ children }) => {
-  const { currentUser } = useContext(AuthContext);
-  const [socket, setSocket] = useState(null);
+  const { currentUser } = useContext(AuthContext)
+  const [socket, setSocket] = useState(null)
 
   useEffect(() => {
-    setSocket(io("http://localhost:4000"));
-  }, []);
+    setSocket(io('https://full-stack-estate-7zs3.onrender.com'))
+  }, [])
 
   useEffect(() => {
-  currentUser && socket?.emit("newUser", currentUser.id);
-  }, [currentUser, socket]);
+    currentUser && socket?.emit('newUser', currentUser.id)
+  }, [currentUser, socket])
 
-  return (
-    <SocketContext.Provider value={{ socket }}>
-      {children}
-    </SocketContext.Provider>
-  );
-};
+  return <SocketContext.Provider value={{ socket }}>{children}</SocketContext.Provider>
+}

@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios from 'axios'
 
 const apiRequest = axios.create({
-  baseURL: "http://localhost:8800/api",
+  baseURL: 'https://full-stack-estate-7zs3.onrender.com/api',
   withCredentials: true,
-});
+})
 
-export default apiRequest;
+export default apiRequest
