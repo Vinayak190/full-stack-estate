@@ -41,7 +41,6 @@ app.use((req, res, next) => {
       secure: true,
       sameSite: 'none',
       path: '/',
-      domain: '.onrender.com',
     })
   }
   next()
