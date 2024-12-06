@@ -9,6 +9,8 @@ export default defineConfig({
       '/api': {
         target: 'https://full-stack-estate-7zs3.onrender.com',
         changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api/, '/api'),
       },
     },
   },

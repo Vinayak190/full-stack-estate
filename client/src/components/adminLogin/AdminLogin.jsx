@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import axios from 'axios'
+import apiRequest from '../../lib/apiRequest'
 import './adminLogin.scss'
 
 const AdminLogin = () => {
@@ -22,9 +22,7 @@ const AdminLogin = () => {
     setLoading(true)
 
     try {
-      const res = await axios.post('/api/admin/login', inputs, {
-        withCredentials: true,
-      })
+      const res = await apiRequest.post('/admin/login', inputs)
       if (res.data) {
         navigate('/admin/dashboard')
       }
