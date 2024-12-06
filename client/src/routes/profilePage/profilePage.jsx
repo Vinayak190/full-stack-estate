@@ -8,9 +8,7 @@ import { AuthContext } from '../../context/AuthContext'
 
 function ProfilePage() {
   const data = useLoaderData()
-
   const { updateUser, currentUser } = useContext(AuthContext)
-
   const navigate = useNavigate()
 
   const handleLogout = async () => {
@@ -22,6 +20,7 @@ function ProfilePage() {
       console.log(err)
     }
   }
+
   return (
     <div className="profilePage">
       <div className="details">

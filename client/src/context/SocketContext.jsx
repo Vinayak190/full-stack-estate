@@ -5,16 +5,26 @@ import { AuthContext } from './AuthContext'
 export const SocketContext = createContext()
 
 export const SocketContextProvider = ({ children }) => {
-  const { currentUser } = useContext(AuthContext)
   const [socket, setSocket] = useState(null)
+  const { currentUser } = useContext(AuthContext)
 
   useEffect(() => {
-    // setSocket(io('http://localhost:4000'))
-  }, [])
+    if (currentUser) {
+      const newSocket = io('https://full-stack-estate-7zs3.onrender.com')
+      setSocket(newSocket)
 
-  useEffect(() => {
-    currentUser && socket?.emit('newUser', currentUser.id)
-  }, [currentUser, socket])
+      return () => {
+        if (newSocket) {
+          newSocket.disconnect()
+        }
+      }
+    } else {
+      if (socket) {
+        socket.disconnect()
+        setSocket(null)
+      }
+    }
+  }, [currentUser])
 
   return <SocketContext.Provider value={{ socket }}>{children}</SocketContext.Provider>
 }
