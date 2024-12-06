@@ -12,26 +12,18 @@ import adminRoute from './routes/admin.route.js'
 const app = express()
 
 app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', req.headers.origin || '*')
   res.header('Access-Control-Allow-Credentials', 'true')
-  res.header('Access-Control-Allow-Origin', 'https://full-stack-estate.vercel.app')
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
+  res.header('Access-Control-Allow-Methods', '*')
+  res.header('Access-Control-Allow-Headers', '*')
   if (req.method === 'OPTIONS') {
-    return res.sendStatus(200)
+    return res.status(200).send()
   }
   next()
 })
 
 app.use(express.json())
 app.use(cookieParser())
-
-app.use(
-  cors({
-    origin: 'https://full-stack-estate.vercel.app',
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  })
-)
 
 app.use((req, res, next) => {
   const oldCookie = res.cookie
