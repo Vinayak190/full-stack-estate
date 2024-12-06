@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import axios from 'axios'
+import apiRequest from '../../lib/apiRequest'
 import './adminDashboard.scss'
 
 const AdminDashboard = () => {
@@ -15,10 +15,8 @@ const AdminDashboard = () => {
 
   const fetchPosts = async () => {
     try {
-      const res = await axios.get('/api/admin/posts', {
-        withCredentials: true,
-      })
-      setPosts(res.data)
+      const res = await apiRequest.get('/admin/posts')
+      setPosts(Array.isArray(res.data) ? res.data : [])
     } catch (err) {
       if (err.response?.status === 401 || err.response?.status === 403) {
         navigate('/admin/login')
@@ -34,9 +32,7 @@ const AdminDashboard = () => {
     if (!window.confirm('Are you sure you want to delete this post?')) return
 
     try {
-      await axios.delete(`/api/admin/posts/${id}`, {
-        withCredentials: true,
-      })
+      await apiRequest.delete(`/admin/posts/${id}`)
       setPosts(posts.filter((post) => post.id !== id))
     } catch (err) {
       if (err.response?.status === 401 || err.response?.status === 403) {
@@ -78,7 +74,7 @@ const AdminDashboard = () => {
                   <td>{post.title}</td>
                   <td>${post.price}</td>
                   <td>{post.city}</td>
-                  <td>{post.user.username}</td>
+                  <td>{post.user?.username}</td>
                   <td>
                     <button onClick={() => handleDelete(post.id)}>Delete</button>
                   </td>
