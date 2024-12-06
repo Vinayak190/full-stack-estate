@@ -11,16 +11,38 @@ import adminRoute from './routes/admin.route.js'
 
 const app = express()
 
+const allowedOrigins = ['http://localhost:5173', 'https://full-stack-estate.vercel.app']
+
 app.use(
   cors({
-    origin: ['http://localhost:5173', 'https://full-stack-estate.vercel.app'],
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
+    },
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
   })
 )
 app.use(express.json())
 app.use(cookieParser())
+
+app.use((req, res, next) => {
+  res.cookie = res.cookie.bind(res)
+  const oldCookie = res.cookie
+  res.cookie = function (name, value, options = {}) {
+    return oldCookie.call(this, name, value, {
+      ...options,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      domain: process.env.NODE_ENV === 'production' ? '.vercel.app' : undefined,
+    })
+  }
+  next()
+})
 
 app.use('/api/auth', authRoute)
 app.use('/api/users', userRoute)
