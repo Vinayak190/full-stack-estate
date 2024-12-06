@@ -36,9 +36,9 @@ app.use((req, res, next) => {
   res.cookie = function (name, value, options = {}) {
     return oldCookie.call(this, name, value, {
       ...options,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-      domain: process.env.NODE_ENV === 'production' ? '.vercel.app' : undefined,
+      secure: true,
+      sameSite: 'none',
+      path: '/',
     })
   }
   next()

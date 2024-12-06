@@ -32,7 +32,7 @@ export const adminLogin = async (req, res) => {
         secure: true,
         sameSite: 'none',
         maxAge: 1000 * 60 * 60 * 24 * 7,
-        domain: process.env.NODE_ENV === 'production' ? '.vercel.app' : 'localhost',
+        path: '/',
       })
       .status(200)
       .json(adminInfo)

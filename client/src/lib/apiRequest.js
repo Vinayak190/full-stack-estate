@@ -12,7 +12,8 @@ const apiRequest = axios.create({
 apiRequest.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401 && window.location.pathname !== '/login') {
+    // Only handle 401s for non-notification endpoints
+    if (error.response?.status === 401 && !error.config.url.includes('/notification') && window.location.pathname !== '/login') {
       localStorage.removeItem('user')
       window.location.href = '/login'
     }
