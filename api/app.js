@@ -11,7 +11,14 @@ import adminRoute from './routes/admin.route.js'
 
 const app = express()
 
-app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }))
+app.use(
+  cors({
+    origin: ['http://localhost:5173', 'https://full-stack-estate.vercel.app'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+)
 app.use(express.json())
 app.use(cookieParser())
 

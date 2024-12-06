@@ -29,7 +29,10 @@ export const adminLogin = async (req, res) => {
     res
       .cookie('adminToken', token, {
         httpOnly: true,
-        maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+        secure: true,
+        sameSite: 'none',
+        maxAge: 1000 * 60 * 60 * 24 * 7,
+        domain: process.env.NODE_ENV === 'production' ? '.vercel.app' : 'localhost',
       })
       .status(200)
       .json(adminInfo)
