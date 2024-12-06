@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from 'react'
-import apiRequest from '../lib/apiRequest'
 
 export const AuthContext = createContext()
 
@@ -17,13 +16,8 @@ export const AuthContextProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    if (currentUser) {
-      // Verify token validity
-      apiRequest.get('/auth/verify').catch(() => {
-        clearUser()
-      })
-    }
-  }, [])
+    localStorage.setItem('user', JSON.stringify(currentUser))
+  }, [currentUser])
 
   return <AuthContext.Provider value={{ currentUser, updateUser, clearUser }}>{children}</AuthContext.Provider>
 }

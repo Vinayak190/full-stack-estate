@@ -6,14 +6,13 @@ const apiRequest = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  credentials: 'include',
 })
 
 // Add response interceptor to handle 401 errors
 apiRequest.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
+    if (error.response?.status === 401 && window.location.pathname !== '/login') {
       localStorage.removeItem('user')
       window.location.href = '/login'
     }
